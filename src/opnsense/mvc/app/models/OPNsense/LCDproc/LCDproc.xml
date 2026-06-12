@@ -64,6 +64,7 @@
                 <Default>curses</Default>
                 <Required>Y</Required>
                 <OptionValues>
+                    <ax93304>AX93304</ax93304>
                     <bayrad>BayRAD</bayrad>
                     <CFontz>CrystalFontz (CFontz)</CFontz>
                     <CFontzPacket>CrystalFontz Packet (CFontzPacket)</CFontzPacket>
