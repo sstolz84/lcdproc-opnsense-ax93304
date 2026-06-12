@@ -107,9 +107,26 @@ start_service() {
 init_mtxorb_backlight() {
     # Read Matrix Orbital backlight color from config and send initialization
     # command to serial port if needed
-    driver=$(/usr/local/sbin/configctl -q lcdproc general driver 2>/dev/null || true)
-    color=$(/usr/local/sbin/configctl -q lcdproc general mtxorb_backlight_color 2>/dev/null || true)
-    comport=$(/usr/local/sbin/configctl -q lcdproc general comport 2>/dev/null || true)
+    driver=$(/usr/local/bin/php -r "
+        \$xml = @simplexml_load_file('/conf/config.xml');
+        echo (\$xml && isset(\$xml->OPNsense->lcdproc->general->driver))
+            ? (string)\$xml->OPNsense->lcdproc->general->driver
+            : '';
+    " 2>/dev/null)
+
+    color=$(/usr/local/bin/php -r "
+        \$xml = @simplexml_load_file('/conf/config.xml');
+        echo (\$xml && isset(\$xml->OPNsense->lcdproc->general->mtxorb_backlight_color))
+            ? (string)\$xml->OPNsense->lcdproc->general->mtxorb_backlight_color
+            : '';
+    " 2>/dev/null)
+
+    comport=$(/usr/local/bin/php -r "
+        \$xml = @simplexml_load_file('/conf/config.xml');
+        echo (\$xml && isset(\$xml->OPNsense->lcdproc->general->comport))
+            ? (string)\$xml->OPNsense->lcdproc->general->comport
+            : '';
+    " 2>/dev/null)
 
     if [ "${driver}" != "MtxOrb" ] || [ -z "${color}" ] || [ "${comport}" = "none" ]; then
         return
