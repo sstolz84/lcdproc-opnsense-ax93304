@@ -103,6 +103,20 @@ function lcdproc_read_config() {
     }
 }
 
+function get_nut_ups_name()
+{
+    $config = @simplexml_load_file('/conf/config.xml');
+
+    if ($config !== false && isset($config->Nut->general->name)) {
+        $name = trim((string)$config->Nut->general->name);
+        if ($name !== '') {
+            return $name;
+        }
+    }
+
+    return 'ups';
+}
+
 function screen_enabled($name) {
     global $lcdproc_screen_config;
     return (($lcdproc_screen_config[$name] ?? '0') === '1');
@@ -925,7 +939,10 @@ function get_apcupsd_stats() {
  * Get NUT UPS status via upsc.
  */
 function get_nutups_stats() {
-    $output = @shell_exec("upsc ups@localhost 2>/dev/null");
+    $ups_name = get_nut_ups_name();
+    $ups_target = escapeshellarg($ups_name . '@127.0.0.1');
+
+    $output = @shell_exec("upsc {$ups_target} 2>/dev/null");
     if (empty($output)) {
         return null;
     }
