@@ -107,8 +107,8 @@ function get_nut_ups_name()
 {
     $config = @simplexml_load_file('/conf/config.xml');
 
-    if ($config !== false && isset($config->Nut->general->name)) {
-        $name = trim((string)$config->Nut->general->name);
+    if ($config !== false && isset($config->OPNsense->Nut->general->name)) {
+        $name = trim((string)$config->OPNsense->Nut->general->name);
         if ($name !== '') {
             return $name;
         }
