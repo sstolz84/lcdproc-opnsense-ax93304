@@ -1122,7 +1122,7 @@ function build_interface($lcd) {
 
     /* --- scr_version --- */
     if (screen_enabled('scr_version')) {
-        $add_standard_screen('scr_version', 'Welcome to');
+        $add_standard_screen('scr_version', 'System Version');
     }
 
     /* --- scr_time --- */
