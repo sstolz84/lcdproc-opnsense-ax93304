@@ -41,7 +41,7 @@ $lcdproc_screen_config = [];
 
 /* Traffic rate tracking (for bps calculations) */
 $traffic_prev = [];
-$traffic_prev_time = 0;
+$traffic_prev_time = [];
 
 /* ======================== LOGGING ======================== */
 
@@ -716,8 +716,8 @@ function get_traffic_bps($ifdescr) {
     $in_bps = 0;
     $out_bps = 0;
 
-    if (isset($traffic_prev[$realif]) && $traffic_prev_time > 0) {
-        $elapsed = $now - $traffic_prev_time;
+    if (isset($traffic_prev[$realif]) && isset($traffic_prev_time[$realif])) {
+        $elapsed = $now - $traffic_prev_time[$realif];
         if ($elapsed > 0) {
             $in_diff = $stats['inbytes'] - $traffic_prev[$realif]['inbytes'];
             $out_diff = $stats['outbytes'] - $traffic_prev[$realif]['outbytes'];
@@ -734,7 +734,7 @@ function get_traffic_bps($ifdescr) {
     }
 
     $traffic_prev[$realif] = $stats;
-    $traffic_prev_time = $now;
+    $traffic_prev_time[$realif] = $now;
 
     return ['in_bps' => $in_bps, 'out_bps' => $out_bps];
 }
