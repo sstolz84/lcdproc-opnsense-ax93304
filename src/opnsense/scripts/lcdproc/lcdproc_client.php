@@ -680,17 +680,22 @@ function ipsec_list_sa() {
  */
 function get_interface_stats($realif) {
     $stats = ['inbytes' => 0, 'outbytes' => 0, 'inpkts' => 0, 'outpkts' => 0];
+
     $output = @shell_exec("netstat -I " . escapeshellarg($realif) . " -b -n 2>/dev/null | tail -1");
+
     if ($output !== null) {
         $fields = preg_split('/\s+/', trim($output));
-        /* netstat -I -b format: Name Mtu Network Address Ipkts Ierrs Ibytes Opkts Oerrs Obytes Coll */
-        if (count($fields) >= 10) {
-            $stats['inpkts'] = (int)$fields[4];
-            $stats['inbytes'] = (int)$fields[6];
-            $stats['outpkts'] = (int)$fields[7];
-            $stats['outbytes'] = (int)$fields[9];
+
+        // FreeBSD/OPNsense netstat -I <if> -b -n:
+        // Ipkts Ierrs Idrops Ibytes Opkts Oerrs Obytes Colls
+        if (count($fields) >= 8) {
+            $stats['inpkts']   = (int)$fields[0];
+            $stats['inbytes']  = (int)$fields[3];
+            $stats['outpkts']  = (int)$fields[4];
+            $stats['outbytes'] = (int)$fields[6];
         }
     }
+
     return $stats;
 }
 
