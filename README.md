@@ -134,7 +134,7 @@ src/
 
 ## Supported Drivers
 
-BayRAD, CrystalFontz (CFontz), CrystalFontz Packet (CFontzPacket), Curses (Terminal), CwLinux, VLSystem EA65, EyeboxOne, GLCD, GLK (MatrixOrbital GLK), HD44780 and compatibles, ICP A106, IOWarrior USB, LB216, LCDM001, LCTerm, MD8800, MS6931, MTC S16209x, Matrix Orbital (MtxOrb), Noritake VFD, picoLCD USB, Pyramid, Raw Serial, SDEC LCD (Watchguard), SED1330, SED1520, Serial POS, Serial VFD, Shuttle USB VFD, SLI, STV5730, Sure Electronics, T6963, Text Mode, Tyan, VLSys M428
+AX93304, BayRAD, CrystalFontz (CFontz), CrystalFontz Packet (CFontzPacket), Curses (Terminal), CwLinux, VLSystem EA65, EyeboxOne, GLCD, GLK (MatrixOrbital GLK), HD44780 and compatibles, ICP A106, IOWarrior USB, LB216, LCDM001, LCTerm, MD8800, MS6931, MTC S16209x, Matrix Orbital (MtxOrb), Noritake VFD, picoLCD USB, Pyramid, Raw Serial, SDEC LCD (Watchguard), SED1330, SED1520, Serial POS, Serial VFD, Shuttle USB VFD, SLI, STV5730, Sure Electronics, T6963, Text Mode, Tyan, VLSys M428
 
 ### HD44780 Connection Types
 
